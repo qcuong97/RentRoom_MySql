@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">RentRoom</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="times">
+        <item>1 giờ</item>
+        <item>2 giờ</item>
+        <item>3 giờ</item>
+        <item>4 giờ</item>
+        <item>5 giờ</item>
+        <item>6 giờ</item>
+        <item>7 giờ</item>
+        <item>8 giờ</item>
+        <item>9 giờ</item>
+        <item>10 giờ</item>
+        <item>11 giờ</item>
+        <item>12 giờ</item>
+        <item>13 giờ</item>
+        <item>14 giờ</item>
+        <item>15 giờ</item>
+        <item>16 giờ</item>
+        <item>17 giờ</item>
+        <item>18 giờ</item>
+        <item>19 giờ</item>
+        <item>20 giờ</item>
+        <item>21 giờ</item>
+        <item>22 giờ</item>
+        <item>23 giờ</item>
+        <item>24 giờ</item>
+    </string-array>
+</resources>
