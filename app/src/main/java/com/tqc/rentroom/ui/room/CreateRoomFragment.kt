@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 
 
-class CreateRoomFragment(val idRoom: Int, val isEdit: Boolean) : BaseFragment() {
+class CreateRoomFragment(var idRoom: Int, val isEdit: Boolean) : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -97,8 +97,8 @@ class CreateRoomFragment(val idRoom: Int, val isEdit: Boolean) : BaseFragment() 
                             GlobalScope.launch(Dispatchers.IO) {
                                 val isError: Boolean
                                 val mess = if (MySqlConnection.executeUpdate(str) != 0) {
-                                    isError = true
-                                    "Tạo phòng mới thành công"
+                                    isError = false
+                                    "Chỉnh sửa phòng thành công"
                                 } else {
                                     isError = true
                                     "Có lỗi xảy ra! \n Hãy thử lại sau"
@@ -106,16 +106,9 @@ class CreateRoomFragment(val idRoom: Int, val isEdit: Boolean) : BaseFragment() 
                                 activity?.runOnUiThread {
                                     showMessageDialog(
                                         mess,
-                                        isHidden = isError,
+                                        isHidden = !isError,
                                         onClick = {
-                                            if (!isError) {
-                                                editName.setText("")
-                                                editPriceAft.setText("")
-                                                editPriceNight.setText("")
-                                                editAllDate.setText("")
-                                                editNote.setText("")
-                                                EventBus.getDefault().post(GetListRoom())
-                                            }
+                                            EventBus.getDefault().post(GetListRoom())
                                         })
                                 }
                                 activity?.runOnUiThread {
@@ -135,7 +128,7 @@ class CreateRoomFragment(val idRoom: Int, val isEdit: Boolean) : BaseFragment() 
                         MySqlConnection.executeInsert(str)?.let {
                             val isError: Boolean
                             val mess = if (it.isNotEmpty()) {
-                                isError = true
+                                isError = false
                                 "Tạo phòng mới thành công"
                             } else {
                                 isError = true
@@ -147,6 +140,7 @@ class CreateRoomFragment(val idRoom: Int, val isEdit: Boolean) : BaseFragment() 
                                     isHidden = isError,
                                     onClick = {
                                         if (!isError) {
+                                            idRoom++
                                             editName.setText("")
                                             editPriceAft.setText("")
                                             editPriceNight.setText("")

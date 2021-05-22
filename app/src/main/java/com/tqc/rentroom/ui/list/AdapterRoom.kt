@@ -12,8 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class AdapterRoom(layoutID: Int, data : ArrayList<RoomModel>,private val onSuccessRent: ((String) -> Unit),
-                  private val onEdit: ((String) -> Unit),private val onRent: (String) -> Unit) : BaseQuickAdapter<RoomModel, BaseViewHolder>(layoutID, data) {
+class AdapterRoom(layoutID: Int,private val onSuccessRent: ((String) -> Unit),
+                  private val onEdit: ((String) -> Unit),private val onRent: (String) -> Unit) : BaseQuickAdapter<RoomModel, BaseViewHolder>(layoutID) {
 
     override fun convert(holder: BaseViewHolder, item: RoomModel) {
         holder.setText(R.id.nameTV, item.name)

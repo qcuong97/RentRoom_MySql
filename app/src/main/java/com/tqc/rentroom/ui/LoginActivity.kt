@@ -26,10 +26,9 @@ class LoginActivity : BaseActivity() {
         val editPW = findViewById<EditText>(R.id.passwordEdt)
         findViewById<LinearLayout>(R.id.btnLogin)?.setOnClickListener {
             dialog.showLoadingDialog()
-            editUN.setText("admin")
-            editPW.setText("1")
             val str = "SELECT * FROM nhan_vien WHERE ten_nv = '${editUN.text}' AND cap_bac = ('quan_tri' OR 'nhan_vien')  LIMIT 1"
             if (editPW.text.isNullOrBlank() || editUN.text.isNullOrBlank()) {
+                dialog.hideLoadingDialog()
                 dialog.showAlertMessage("Vui lòng nhập đầy đủ thông tin đăng nhập")
             } else {
                 GlobalScope.launch(Dispatchers.IO) {
@@ -39,16 +38,21 @@ class LoginActivity : BaseActivity() {
                             if (pass == editPW.text.toString()) {
                                 rs.close()
                                 dialog.hideLoadingDialog()
-                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK and Intent.FLAG_ACTIVITY_NEW_TASK
+                                finish()
+                                startActivity(intent)
                             } else {
                                 rs.close()
                                 runOnUiThread {
+                                    dialog.hideLoadingDialog()
                                     dialog.showAlertMessage("Sai mật khẩu hoặc tài khoản")
                                 }
                             }
                         } else {
                             rs.close()
                             runOnUiThread {
+                                dialog.hideLoadingDialog()
                                 dialog.showAlertMessage("Sai mật khẩu hoặc tài khoản")
                             }
                         }
@@ -57,4 +61,5 @@ class LoginActivity : BaseActivity() {
             }
         }
     }
+
 }
